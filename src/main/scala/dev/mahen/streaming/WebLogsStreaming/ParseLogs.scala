@@ -2,6 +2,16 @@ package dev.mahen.streaming.WebLogsStreaming
 
 import org.apache.commons.io.IOUtils
 
+/**
+ * Class Not used
+ * parses the Logs,
+ * Sessionize,
+ * Identifies 
+ * 	UserAgents
+ * 	Bots
+ * 	
+ */
+
 class ParseLogs(val line: String) {
 
   def parse() {

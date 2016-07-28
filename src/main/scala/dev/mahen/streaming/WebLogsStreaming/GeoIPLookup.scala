@@ -1,11 +1,21 @@
 package dev.mahen.streaming.WebLogsStreaming
 
+/**
+ * @author mqp29
+ */
+
 import com.maxmind.geoip.LookupService
 import java.io.File
 import org.apache.commons.validator.routines.InetAddressValidator
 
+/**
+ * Augments the ip address with location
+ */
 class GeoIPLookup(val ip: String) {
 
+  /**
+   * @return Tuple(countryName,city,areaCode,countryCode,region)
+   */
   def apply(): (String, String, Int, String, String) = {
 
     val GeoIpFile = this.getClass.getClassLoader.getResource("GeoLiteCity.dat");
@@ -22,12 +32,16 @@ class GeoIPLookup(val ip: String) {
 
     println("IP Input : " + ip)
     
-    val notIn = List("102.242.18.229")
+    val notIn = List("102.242.18.229") //not sure anout this IP. Somthing  fishy
+
+    //validate the ip
     if (InetAddressValidator.getInstance.isValid(ip) && !notIn.contains(ip)) {
 
-    
+      //get the location    
       val location = cl.getLocation(ip)
       cl.close()
+      
+      //return a tuple
       (location.countryName, location.city, location.area_code, location.countryCode, location.region)
 
     } else {
@@ -39,6 +53,7 @@ class GeoIPLookup(val ip: String) {
 
 }
 
+//Companion Object
 object GeoIPLookup {
 
   def apply(fileName: String) {
