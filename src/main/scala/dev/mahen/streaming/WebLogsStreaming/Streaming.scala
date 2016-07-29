@@ -67,7 +67,7 @@ object Streaming {
 
   def parseLine(fileStream: DStream[String]): DStream[Line] = {
 
-    //Reges Pattern to parse the Logs
+    //Regex Pattern to parse the Logs
     val regex = """(\d+.\d+.\d+.\d+)\t+([-])\t([-])\t+(\[.+?\])\t+(\".+?\")\t+(\d+)\t+(\d+)\t+(\".?\")\t+(\".+?\")"""
     val p = Pattern.compile(regex)
 
